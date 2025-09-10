@@ -9,3 +9,10 @@ export type Credit = {
 };
 
 export type Credits = Credit[];
+
+export type TableCreditField = {
+  field: keyof Credit;
+  headerName: string;
+};
+
+export type TableCreditFields = TableCreditField[];
