@@ -2,8 +2,8 @@ import { Button, Modal, Box } from '@mui/material';
 import { type PropsWithChildren, type ReactElement } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import Loader from '../Loader/Loader';
-import { useAppSelector } from '../../../hooks/hooks';
 import { getIsLoading } from '../../../store/creditSlice/credit.selector';
+import { useAppSelector } from '../../../hooks/store';
 
 const modalStyles = {
   position: 'absolute',
