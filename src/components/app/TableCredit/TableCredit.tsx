@@ -7,6 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import type { Credits } from '../../../types/types';
 import { TABLE_CREDIT_FIELDS } from '../../../const';
+import TableCellActions from '../TableCellActions/TableCellActions';
 
 export default function TableCredit({ credits }: { credits: Credits }) {
   return (
@@ -17,6 +18,7 @@ export default function TableCredit({ credits }: { credits: Credits }) {
             {TABLE_CREDIT_FIELDS.map(({ headerName }) => {
               return <TableCell key={headerName}>{headerName}</TableCell>;
             })}
+            <TableCell key="Действия">Действия</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -25,6 +27,9 @@ export default function TableCredit({ credits }: { credits: Credits }) {
               {TABLE_CREDIT_FIELDS.map(({ field, headerName }) => {
                 return <TableCell key={headerName}>{credit[field]}</TableCell>;
               })}
+              <TableCell key="Действия">
+                <TableCellActions cell={credit} />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
