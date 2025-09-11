@@ -16,10 +16,6 @@ export const FIELD_REQUIRED_ERROR_MESSAGE = getObjectWithErrorMessage(
   'Должно быть заполнено'
 );
 
-export const FIELD_NOT_POSITIVE_ERROR_MESSAGE = getObjectWithErrorMessage(
-  'Значение должны быть положительным'
-);
-
 export const TABLE_CREDIT_FIELDS: TableCreditFields = [
   {
     field: 'id',
