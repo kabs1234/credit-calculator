@@ -12,27 +12,31 @@ import {
 } from '../../../utils/utils';
 import NumberInput from '../../ui/NumberInput/NumberInput.tsx';
 import { useQueryAction } from '../../../hooks/hooks.ts';
-import {
-  FIELD_REQUIRED_ERROR_MESSAGE,
-  FIELD_NOT_POSITIVE_ERROR_MESSAGE,
-} from '../../../const.ts';
+import { FIELD_REQUIRED_ERROR_MESSAGE } from '../../../const.ts';
 import CreditSummary from '../CreditSummary/CreditSummary.tsx';
 import { useState } from 'react';
 
 export type FormType = z.infer<typeof formSchema>;
 
-const zodPositiveNumberField = z.coerce
-  .number<number>(FIELD_REQUIRED_ERROR_MESSAGE)
-  .min(1, FIELD_NOT_POSITIVE_ERROR_MESSAGE);
+const zodNumberField = z.coerce.number<number>(FIELD_REQUIRED_ERROR_MESSAGE);
 
 const formSchema = z.object({
   fullName: z
     .string(FIELD_REQUIRED_ERROR_MESSAGE)
     .min(2, getObjectWithErrorMessage('Имя должно иметь не менее 2 символов.')),
   phoneNumber: z.e164(FIELD_REQUIRED_ERROR_MESSAGE),
-  loanAmount: zodPositiveNumberField,
-  loanTerm: zodPositiveNumberField,
-  interestRate: zodPositiveNumberField,
+  loanAmount: zodNumberField.min(
+    10001,
+    getObjectWithErrorMessage('Значение должны быть больше 10 000')
+  ),
+  loanTerm: zodNumberField.min(
+    4,
+    getObjectWithErrorMessage('Значение должны быть больше 3')
+  ),
+  interestRate: zodNumberField.min(
+    1,
+    getObjectWithErrorMessage('Значение должны быть больше 1')
+  ),
 });
 
 export function CreditForm({
@@ -165,6 +169,7 @@ export function CreditForm({
                   field={field}
                   error={error}
                   label="Сумма кредита"
+                  decimalScale={0}
                 />
               )}
             />
@@ -177,6 +182,7 @@ export function CreditForm({
                   field={field}
                   error={error}
                   label="Срок (месяцы)"
+                  decimalScale={0}
                 />
               )}
             />
@@ -189,6 +195,7 @@ export function CreditForm({
                   field={field}
                   error={error}
                   label="Процентная ставка"
+                  decimalScale={2}
                 />
               )}
             />
