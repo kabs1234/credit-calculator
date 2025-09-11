@@ -44,3 +44,14 @@ export const getCapitalizedWord = (word: string): string => {
 
   return word[0].toUpperCase() + word.slice(1).toLowerCase();
 };
+
+export const getCalculatedMonthlyPayment = (
+  loanAmount: number,
+  loanTerm: number,
+  interestRate: number
+): number => {
+  const monthlyRate = interestRate / 12 / 100;
+  const growthFactor = (1 + monthlyRate) ** loanTerm;
+
+  return loanAmount * ((monthlyRate * growthFactor) / (growthFactor - 1));
+};

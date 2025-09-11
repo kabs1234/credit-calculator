@@ -26,7 +26,7 @@ export default function CreditToolbar(): ReactElement {
         </Button>
 
         <CustomModal isModalOpen={isModalOpen} onModalClose={onModalClose}>
-          <CreditForm onModalClose={onModalClose} />
+          <CreditForm onFormSuccesfulSubmit={onModalClose} />
         </CustomModal>
       </Toolbar>
     </AppBar>
